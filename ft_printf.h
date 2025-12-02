@@ -3,6 +3,7 @@
 
 # include <stdarg.h>
 # include <unistd.h>
+# include <stddef.h>
 
 #include "ft_printf.h"
 
@@ -22,5 +23,3 @@ int		ft_pointer(void *ptr);
 int		ft_str(char *str);
 int		ft_printf(const char *format, ...);
 #endif
-
-
