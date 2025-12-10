@@ -1,4 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: halakhal <halakhal@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/04 18:40:30 by halakhal          #+#    #+#             */
+/*   Updated: 2025/12/10 18:57:08 by halakhal         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdarg.h>
 #include "ft_printf.h"
+
 
 int	ft_format(va_list args, const char format)
 {
@@ -50,24 +64,4 @@ int	ft_printf(const char *format, ...)
 	}
 	va_end(args);
 	return (finished);
-}
-#include <stdio.h>
-
-int	main(void)
-{
-	int				length;
-	int				len;
-	unsigned long	p;
-	void			*xp;
-
-	length = 0;
-	len = 0;
-	p = 0;
-	xp = (void *)p;
-	length = ft_printf("%c %d %i  %s %x %X %% %u %p\n", 'a', -1, -22, "hanieh",
-			5000, 1000, 5, xp);
-	ft_printf("%d\n", length);
-	len = printf("%c %d %i  %s %x %X %% %u %p\n", 'a', -1, -22, "HANIEH", 1000,
-			1000, 5, xp);
-	printf("%d\n", len);
 }
