@@ -6,7 +6,7 @@
 /*   By: halakhal <halakhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 18:55:56 by halakhal          #+#    #+#             */
-/*   Updated: 2025/12/10 18:55:58 by halakhal         ###   ########.fr       */
+/*   Updated: 2025/12/16 20:55:42 by halakhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	ft_putchar(int c)
 int	ft_str(char *str)
 {
 	int	i;
+
 	i = 0;
 	if (!str)
 	{

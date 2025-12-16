@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print.c                                         :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: halakhal <halakhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 18:40:30 by halakhal          #+#    #+#             */
-/*   Updated: 2025/12/10 18:57:08 by halakhal         ###   ########.fr       */
+/*   Updated: 2025/12/16 20:56:16 by halakhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include "ft_printf.h"
-
+#include <stdarg.h>
 
 int	ft_format(va_list args, const char format)
 {
@@ -43,27 +42,20 @@ int	ft_printf(const char *format, ...)
 	va_list	args;
 	int		finished;
 	int		i;
-	int		ret;
 
 	i = 0;
 	finished = 0;
 	va_start(args, format);
 	while (format[i])
 	{
-		if (format[i] == '%' && format[i + 1])
+		if (format[i] == '%')
 		{
-			ret = ft_format(args, format[i + 1]);
-			if (ret == -1)
-				return (va_end(args), -1);
-			finished += ret;
+			finished += ft_format(args, format[i + 1]);
 			i++;
 		}
 		else
 		{
-			ret = ft_putchar(format[i]);
-			if (ret == -1)
-				return (va_end(args), -1);
-			finished += ret;
+			finished += ft_putchar(format[i]);
 		}
 		i++;
 	}

@@ -6,10 +6,9 @@
 /*   By: halakhal <halakhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 18:55:49 by halakhal          #+#    #+#             */
-/*   Updated: 2025/12/10 18:55:50 by halakhal         ###   ########.fr       */
+/*   Updated: 2025/12/16 20:55:30 by halakhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
