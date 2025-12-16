@@ -35,8 +35,6 @@ int	ft_format(va_list args, const char format)
 		result = ft_hexa_x(va_arg(args, unsigned int));
 	else if (format == 'X')
 		result = ft_hexa_bx(va_arg(args, unsigned int));
-	else
-		result = ft_putchar('%');
 	return (result);
 }
 
@@ -45,20 +43,27 @@ int	ft_printf(const char *format, ...)
 	va_list	args;
 	int		finished;
 	int		i;
+	int		ret;
 
 	i = 0;
 	finished = 0;
 	va_start(args, format);
 	while (format[i])
 	{
-		if (format[i] == '%')
+		if (format[i] == '%' && format[i + 1])
 		{
-			finished += ft_format(args, format[i + 1]);
+			ret = ft_format(args, format[i + 1]);
+			if (ret == -1)
+				return (va_end(args), -1);
+			finished += ret;
 			i++;
 		}
 		else
 		{
-			finished += ft_putchar(format[i]);
+			ret = ft_putchar(format[i]);
+			if (ret == -1)
+				return (va_end(args), -1);
+			finished += ret;
 		}
 		i++;
 	}

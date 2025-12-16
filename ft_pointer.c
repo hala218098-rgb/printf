@@ -12,38 +12,49 @@
 
 #include "ft_printf.h"
 
-void	ft_pointer_function(unsigned long long nb)
+int	ft_pointer_function(unsigned long long nb)
 {
+	int	ret;
+
 	if (nb >= 16)
 	{
-		ft_pointer_function(nb / 16);
-		ft_pointer_function(nb % 16);
+		ret = ft_pointer_function(nb / 16);
+		if (ret == -1)
+			return (-1);
+		ret = ft_pointer_function(nb % 16);
+		if (ret == -1)
+			return (-1);
 	}
 	else
 	{
 		if (nb < 10)
-			ft_putchar(nb % 10 + '0');
+			ret = ft_putchar(nb % 10 + '0');
 		else
-			ft_putchar(nb - 10 + 'a');
+			ret = ft_putchar(nb - 10 + 'a');
+		if (ret == -1)
+			return (-1);
 	}
+	return (1);
 }
 
 int	ft_pointer(void *ptr)
 {
 	int					len;
 	unsigned long long	nb;
+	unsigned long long	temp;
 
 	nb = (unsigned long long)ptr;
+	temp = nb;
 	len = 0;
-	write(1, "0x", 2);
-	ft_pointer_function(nb);
-	if (nb == 0)
-	{
+	if (write(1, "0x", 2) == -1)
+		return (-1);
+	if (ft_pointer_function(nb) == -1)
+		return (-1);
+	if (temp == 0)
 		len++;
-	}
-	while (nb > 0)
+	while (temp > 0)
 	{
-		nb /= 16;
+		temp /= 16;
 		len++;
 	}
 	return (len + 2);

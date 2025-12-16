@@ -14,23 +14,25 @@
 
 int	ft_putchar(int c)
 {
-	write(1, &c, 1);
+	if (write(1, &c, 1) == -1)
+		return (-1);
 	return (1);
 }
 
 int	ft_str(char *str)
 {
 	int	i;
-
 	i = 0;
 	if (!str)
 	{
-		write(1, "(null)", 6);
+		if (write(1, "(null)", 6) == -1)
+			return (-1);
 		return (6);
 	}
 	while (str[i])
 	{
-		write(1, &str[i], 1);
+		if (write(1, &str[i], 1) == -1)
+			return (-1);
 		i++;
 	}
 	return (i);

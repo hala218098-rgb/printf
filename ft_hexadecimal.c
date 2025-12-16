@@ -13,65 +13,89 @@
 
 #include "ft_printf.h"
 
-void	ft_hexagonal_l(unsigned int nb)
+int	ft_hexagonal_l(unsigned int nb)
 {
+	int	ret;
+
 	if (nb >= 16)
 	{
-		ft_hexagonal_l(nb / 16);
-		ft_hexagonal_l(nb % 16);
+		ret = ft_hexagonal_l(nb / 16);
+		if (ret == -1)
+			return (-1);
+		ret = ft_hexagonal_l(nb % 16);
+		if (ret == -1)
+			return (-1);
 	}
 	else
 	{
 		if (nb < 10)
-			ft_putchar (nb % 10 + '0');
+			ret = ft_putchar(nb % 10 + '0');
 		else
-			ft_putchar (nb - 10 + 'a');
+			ret = ft_putchar(nb - 10 + 'a');
+		if (ret == -1)
+			return (-1);
 	}
+	return (1);
 }
 
 int	ft_hexa_x(unsigned int nb)
 {
 	unsigned int	len;
+	unsigned int	temp;
 
 	len = 0;
-	ft_hexagonal_l((unsigned int)nb);
-	if (nb == 0)
+	temp = nb;
+	if (ft_hexagonal_l((unsigned int)nb) == -1)
+		return (-1);
+	if (temp == 0)
 		len++;
-	while (nb > 0)
+	while (temp > 0)
 	{
-		nb /= 16;
+		temp /= 16;
 		len++;
 	}
 	return (len);
 }
 
-void	ft_hexagonal_u(unsigned int nb)
+int	ft_hexagonal_u(unsigned int nb)
 {
+	int	ret;
+
 	if (nb >= 16)
 	{
-		ft_hexagonal_u(nb / 16);
-		ft_hexagonal_u(nb % 16);
+		ret = ft_hexagonal_u(nb / 16);
+		if (ret == -1)
+			return (-1);
+		ret = ft_hexagonal_u(nb % 16);
+		if (ret == -1)
+			return (-1);
 	}
 	else
 	{
 		if (nb < 10)
-			ft_putchar (nb % 10 + '0');
+			ret = ft_putchar(nb % 10 + '0');
 		else
-			ft_putchar (nb - 10 + 'A');
+			ret = ft_putchar(nb - 10 + 'A');
+		if (ret == -1)
+			return (-1);
 	}
+	return (1);
 }
 
 int	ft_hexa_bx(unsigned int nb)
 {
 	unsigned int	len;
+	unsigned int	temp;
 
 	len = 0;
-	ft_hexagonal_u((unsigned int)nb);
-	if (nb == 0)
+	temp = nb;
+	if (ft_hexagonal_u((unsigned int)nb) == -1)
+		return (-1);
+	if (temp == 0)
 		len++;
-	while (nb > 0)
+	while (temp > 0)
 	{
-		nb /= 16;
+		temp /= 16;
 		len++;
 	}
 	return (len);

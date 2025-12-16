@@ -10,62 +10,83 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ft_printf.h"
 
-void	ft_putnbr(int nb)
+int	ft_putnbr(int nb)
 {
+	int	ret;
+
 	if (nb == -2147483648)
 	{
-		write(1, "-2147483648", 11);
-		return ;
+		if (write(1, "-2147483648", 11) == -1)
+			return (-1);
+		return (11);
 	}
 	if (nb < 0)
 	{
-		ft_putchar('-');
+		if (ft_putchar('-') == -1)
+			return (-1);
 		nb *= -1;
 	}
 	if (nb > 9)
 	{
-		ft_putnbr(nb / 10);
+		ret = ft_putnbr(nb / 10);
+		if (ret == -1)
+			return (-1);
 	}
-	ft_putchar(nb % 10 + '0');
+	if (ft_putchar(nb % 10 + '0') == -1)
+		return (-1);
+	return (1);
 }
 
 int	ft_digit(int nb)
 {
 	int	i;
+	int	temp;
 
 	i = 0;
-	ft_putnbr(nb);
-	if (nb <= 0)
+	temp = nb;
+	if (ft_putnbr(nb) == -1)
+		return (-1);
+	if (temp <= 0)
 		i++;
-	while (nb)
+	while (temp)
 	{
-		nb /= 10;
+		temp /= 10;
 		i++;
 	}
 	return (i);
 }
 
-void	ft_doubledigits(unsigned int nb)
+int	ft_doubledigits(unsigned int nb)
 {
+	int	ret;
+
 	if (nb > 9)
-		ft_doubledigits(nb / 10);
-	ft_putchar(nb % 10 + '0');
+	{
+		ret = ft_doubledigits(nb / 10);
+		if (ret == -1)
+			return (-1);
+	}
+	if (ft_putchar(nb % 10 + '0') == -1)
+		return (-1);
+	return (1);
 }
 
 int	ft_unint(unsigned int nb)
 {
 	unsigned int	len;
+	unsigned int	temp;
 
 	len = 0;
-	ft_doubledigits((unsigned int )nb);
-	if (nb == 0)
+	temp = nb;
+	if (ft_doubledigits((unsigned int)nb) == -1)
+		return (-1);
+	if (temp == 0)
 		len++;
-	while (nb > 0)
+	while (temp > 0)
 	{
-		nb /= 10;
+		temp /= 10;
 		len++;
 	}
 	return (len);
